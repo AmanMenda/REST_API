@@ -7,7 +7,9 @@ import { PrismaService } from 'src/prisma/prisma.service';
 export class ArticlesService {
   constructor(private prisma: PrismaService) {}
   create(createArticleDto: CreateArticleDto) {
-    return 'This action adds a new article';
+    return this.prisma.article.create({
+      data: createArticleDto
+    });
   }
 
   findAll() {
@@ -19,7 +21,11 @@ export class ArticlesService {
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} article`;
+    return this.prisma.article.findMany({
+      where: {
+        id: id
+      }
+    });
   }
 
   update(id: number, updateArticleDto: UpdateArticleDto) {
